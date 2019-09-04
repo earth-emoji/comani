@@ -33,7 +33,7 @@ body {
 
 .parallax {
     /* The image used */
-    background-image: url(../images/hiker-1149898_1920.jpg);
+    background-image: url(../images/adorable-animal-beanie-1452717.jpg);
   
     /* Set a specific height */
     height: 100vh;
@@ -68,7 +68,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #3a4660;
+    background-color: #060302;
     opacity: 0.6;
     margin: 0 !important;
     z-index: 0;
@@ -76,7 +76,6 @@ body {
 
 .mid h2 {
     font-weight: 900;
-    color: white;
     text-transform: uppercase;
     margin: 0;
     position: absolute;
@@ -90,7 +89,6 @@ body {
 
 .mid p {
     font-weight: 500;
-    color: white;
     text-transform: uppercase;
     margin: 0;
     position: absolute;
@@ -100,6 +98,8 @@ body {
     transform: translate(-50%, -50%);
     z-index: 1;
     letter-spacing: .5rem;
+    background-color: #060302;
+    padding: 1rem;
 }
 
 .mid #login-btn {
@@ -130,12 +130,13 @@ body {
 }
 
 .block-one {
-    background: url(../images/mountain-2592792_1920.jpg);
+    background: url(../images/men-2425121_1920.jpg);
 }
 
 .block-two {
-    background: url(../images/woman-2896389_1920.jpg);
+    background: url(../images/men-dog-2425121_1920.jpg);
 }
+
 
 .vh-100 {
     height: 100vh !important;

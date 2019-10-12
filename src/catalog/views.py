@@ -28,10 +28,10 @@ from .models import Category, Product, Reservation
 def product_list(request, template_name='products/product_list.html'):
     # acl_obj = Acl.objects.get(name=acl)
     
-    qs1 = Product.objects.filter(product_type='PRODUCT', acl__name=request.user.acl.name)
-    qs2 = Product.objects.filter(product_type='PRODUCT', is_aux=True)
+    # qs1 = Product.objects.filter(product_type='PRODUCT', acl__name=request.user.acl.name)
+    # qs2 = Product.objects.filter(product_type='PRODUCT', is_aux=True)
     
-    object_list = qs1 | qs2
+    object_list = Product.objects.all()
     
     filtered_orders = Order.objects.filter(
         customer=request.user.customer, is_fulfilled=False)

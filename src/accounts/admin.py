@@ -4,13 +4,13 @@ from .models import Customer, Vendor
 
 # Register your models here.
 class CustomerAdmin(admin.ModelAdmin):
-    list_display = ('name', 'customer_type', 'acl',)
+    list_display = ('name', 'acl',)
 
     def name(self, obj):
         return obj.user.name
 
     def acl(self, obj):
-        return obj.user.acl.name
+        return obj.user.acl
 
 
 admin.site.register(Customer, CustomerAdmin)

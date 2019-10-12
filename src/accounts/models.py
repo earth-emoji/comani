@@ -4,7 +4,6 @@ from django.db import models
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 
-from . import choices
 
 class CustomerManager(models.Manager):
     use_for_related_fields = True
@@ -13,7 +12,6 @@ class CustomerManager(models.Manager):
 class Customer(models.Model):
     slug = models.SlugField(unique=True, default=uuid.uuid1, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL, related_name="customer", on_delete=models.CASCADE, blank=True)
-    customer_type = models.CharField(max_length=30, choices=choices.CUSTOMER_TYPE_CHOICES, blank=True)
     objects = CustomerManager()
 
     class Meta:

@@ -1,0 +1,29 @@
+{% load static %}
+
+<div class="col-lg-3 col-12">
+    <div class="img-block img-dimensions"
+        {% for photo in object.album.photos.all %}
+            {% if forloop.first %}
+                style="background-image: url({{ MEDIA_URL }}{{photo.url}});"
+            {% endif %}
+        {% empty %}
+            style="{% static 'images/default.png' %}"
+        {% endfor %}>
+        <div class="txt-block">
+            <h5>{{ object.name }}</h5>
+            <p class="mt-5">
+                {{ object.description|truncatechars:100 }}
+            </p>
+            <small class="d-block">${{ object.price }}</small>
+            <div class="action-buttons" style="padding-top: 6rem;">
+                <button type="button" data-coid="{{ object.slug }}" class="btn product-fader btn-link float-right" role="button"><i class="fas fa-eye float-right"></i></button>
+                {% if object in current_order_products %}
+                    <a href="{% url 'shopping_cart:order_summary' %}" class=""><i class="fas fa-clipboard-list"></i></a>
+                {% else %}
+                    <a href="{% url 'shopping_cart:add_to_cart' object.id %}" class=""><i class="fas fa-shopping-basket"></i></a>
+                {% endif %}
+            </div>
+        </div>
+        <div data-cotarget="{{ object.slug }}" id="overlay_{{ object.slug }}" class="color-overlay"></div>
+    </div>
+</div>

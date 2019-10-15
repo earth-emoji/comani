@@ -7,6 +7,8 @@ from accounts.models import Vendor, Customer
 from photos.models import Album, Photo
 from users.models import User, Acl
 
+from . import choices
+
 # Create your models here.
 class Category(models.Model):
     slug = models.SlugField(unique=True, default=uuid.uuid1, blank=True)
@@ -46,7 +48,7 @@ class Product(models.Model):
     vendor = models.ForeignKey(Vendor, related_name='products', on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, related_name='products', blank=True)
     acl = models.ForeignKey(Acl, related_name='products', on_delete=models.DO_NOTHING, null=True, blank=True)
-    is_aux = models.BooleanField(default=False)
+    is_dog = models.BooleanField(default=False)
     stock_quantity = models.PositiveIntegerField(default=0, blank=True)
     low_stock = models.BooleanField(default=False)
     out_of_stock = models.BooleanField(default=False)
@@ -86,23 +88,20 @@ class Product(models.Model):
         return self.name
 
 
+class DogBreed(models.Model):
+    name = models.CharField(max_length=255, unique=True, blank=True)
+    type = models.CharField(max_length=60, choices=choices.DOG_TYPE_CHOICES, blank=True)
+
+    def __str__(self):
+        return self.name
+
 class Dog(models.Model):
-    DOG_TYPE_CHOICES = (
-        ('Companion', 'Companion'),
-        ('Mixed', 'Mixed'),
-        ('Guard', 'Guard'),
-        ('Hunting', 'Hunting'),
-        ('Pastoral', 'Pastoral'),
-        ('Sled', 'Sled'),
-        ('Other', 'Other')
-    )
     slug = models.SlugField(unique=True, default=uuid.uuid1, blank=True)
-    breed = models.CharField(max_length=255, unique=True, blank=True)
-    type = models.CharField(max_length=60, choices=DOG_TYPE_CHOICES, blank=True)
+    breed = models.ForeignKey(DogBreed, related_name="dogs", on_delete=models.CASCADE, blank=True)
     product = models.ForeignKey(Product, related_name="dogs", on_delete=models.CASCADE, blank=True)
 
     def __str__(self):
-        return self.breed
+        return self.product.name
 
 class Reservation(models.Model):
     slug = models.SlugField(unique=True, default=uuid.uuid1, blank=True)

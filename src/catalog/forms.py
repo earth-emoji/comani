@@ -4,7 +4,8 @@ from django.db import transaction
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 
-from .models import Product, Reservation
+from .choices import DOG_TYPE_CHOICES, DURATION_MEASURE_CHOICES
+from .models import Product, Reservation, Dog, DogBreed
 
 
 class ProductForm(forms.ModelForm):
@@ -26,12 +27,36 @@ class ProductForm(forms.ModelForm):
             'price',
         ]
 
+class DogForm(forms.ModelForm):
+    name = forms.CharField(max_length=128, min_length=2, strip=True, widget=forms.TextInput(
+        attrs={'class ': 'form-control rounded-pill'}))
+    breed = forms.ModelChoiceField(queryset=DogBreed.objects.all(), widget=forms.Select(attrs={'class': 'form-control rounded-pill'}))
+    description = forms.CharField(
+        strip=True, widget=forms.Textarea(attrs={'class ': 'form-control'}))
+    stock_quantity = forms.IntegerField(widget=forms.NumberInput(
+        attrs={'class': 'form-control rounded-pill '}))
+    price = forms.DecimalField(max_digits=6, decimal_places=2, widget=forms.NumberInput(
+        attrs={'class': 'form-control rounded-pill '}))
+
+    class Meta:
+        model = Product
+        fields = [
+            'name',
+            'description',
+            'stock_quantity',
+            'price',
+            'breed'
+        ]
+
+    @transaction.atomic
+    def save(self):
+        dog = super().save()
+        dog.is_dog = True
+        Dog.objects.create(product=dog, breed=self.cleaned_data.get('breed'))
+        return dog
+
 
 class ServiceForm(forms.ModelForm):
-    DURATION_MEASURE_CHOICES = (
-        ('DAY', 'Day'),
-        ('HOUR', 'Hour'),
-    )
     name = forms.CharField(max_length=128, min_length=2, strip=True,
                            widget=forms.TextInput(attrs={'class ': 'form-control'}))
     price = forms.DecimalField(max_digits=6, decimal_places=2,

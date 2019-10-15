@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="bootstrap\css\bootstrap.min.css">
+  </head>
+  <body>
+    <!-- navbar -->
+		<nav class="navbar navbar-expand-sm fixed-top navbar-light bg-light">
+			<a class="navbar-brand" href="#">Comani</a>
+			<button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
+					aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="collapsibleNavId">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Shop</a>
+					</li>
+				</ul>
+				<form class="mx-2 my-auto d-inline w-100">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search catalog">
+						<span class="input-group-append">
+							<button class="btn btn-outline-secondary" type="button">Search</button>
+						</span>
+					</div>
+				</form>
+				<ul class="navbar-nav mt-2 mt-lg-0">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+						<div class="dropdown-menu" aria-labelledby="dropdownId">
+							<a class="dropdown-item" href="#">Action 1</a>
+							<a class="dropdown-item" href="#">Action 2</a>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<!-- profile -->
+		<div class="container-fluid my-5">
+			<!-- profile header -->
+			<header class="row" style="background-color: gray;">
+				<div class="col-3 py-3">
+					<img style="max-width: 12rem; max-height: 12rem;" class="m-5 img-fluid rounded-circle" src="images/defaults/avatar2.png" />
+				</div>
+				<div class="col-9 py-3">
+					<h1 class="m-5">Bio</h1>
+				</div>
+			</header>
+
+			<!-- profile midbar -->
+			<div class="row text-center" style="border-bottom: 1px solid gray;">
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Messages</div>
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Friends</div>
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Groups</div>
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Events</div>
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Photos</div>
+				<div class="col-2 py-2" style="border-left: 1px solid gray; border-right: 1px solid gray;">Videos</div>
+			</div>
+
+			<!-- profile body -->
+			<div class="row">
+				<div class="col-2 py-3"></div>
+
+				<div class="col-7 py-3">
+						
+					<a href="#" data-toggle="popover" data-placement="right" data-toggle="popover" title="Post">Create Posts</a>
+					<div id="popover-content" style="display: none">
+						
+							<form><textarea name="post" id="post" cols="30" rows="10"></textarea></form>
+					</div>
+				</div>
+
+				<div class="col-3 py-3"></div>
+			</div>
+		</div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="jquery\jquery.min.js"></script>
+    <script src="popper\popper.min.js"></script>
+	<script src="bootstrap\js\bootstrap.min.js"></script>
+	<script>
+        $(document).ready(function() {
+            $('[data-toggle="popover"]').popover({
+				html: true,
+				sanitize: false,
+                content: function() {
+                    return $('#popover-content').html();
+                }
+            });
+        });
+    </script>
+  </body>
+</html>
